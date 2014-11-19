@@ -15,31 +15,17 @@
 /include/ "msm8974pro-ab-pm8941.dtsi"
 /include/ "msm8974-m8-common.dtsi"
 /include/ "msm8974-camera-sensor-m8-ver-b.dtsi"
-/include/ "msm8974-m8whl-xb-pmicgpio.dtsi"
+/include/ "msm8974-m8dug-pmicgpio.dtsi"
 /include/ "msm8974-touch-fw-0key-config.dtsi"
-/include/ "msm8974-m8-storage.dtsi"
+/include/ "msm8974-m8dug-storage.dtsi"
 
 / {
-	model = "M8 WHL XF";
-	compatible = "htc,msm8974", "htc,m8whl", "qcom,msm8974-mtp", "qcom,msm8974", "qcom,mtp";
-	htc,project-id = <267 5 0x10000>;
-
-};
-
-&soc {
-	i2c@f9924000 {
-		synaptics_display_LG@20 {
-			support_htc_event = <1>;
-		};
-
-		synaptics_display_Sharp@20 {
-			support_htc_event = <1>;
-		};
-	};
-};
-
-&krait_pdn {
-	qcom,use-phase-switching;
+	model = "M8 DUG XB";
+	compatible = "htc,msm8974", "htc,m8dug", "qcom,msm8974-mtp", "qcom,msm8974", "qcom,mtp";
+	htc,project-id = <299 1 0x10000>,
+              <300 1 0x10000>,
+              <319 1 0x10000>,
+              <269 1 0x10000>;
 };
 
 &pm8941_lsid1 {
@@ -97,5 +83,17 @@
 			qcom,id = <5>;
 			status = "disabled";
 		};
+	};
+};
+
+&soc {
+	i2c@f9928000 {
+		sii8240_8558@72 {
+			mhl-dpdn-gpio = <&msmgpio 129 0>;
+		};
+	};
+
+	sound {
+		wcd-intr-gpio-dir = <0>; //input
 	};
 };
